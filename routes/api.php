@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\DosenController;
@@ -27,6 +29,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:api');
+
 //crud dosen
 Route::resource('/dosen', DosenController::class);
 
@@ -53,3 +59,5 @@ Route::resource('/jadkul', JadkulController::class);
 
 //crud waktu tdk tersedia
 Route::resource('/wkt_tdk_bersedia', WktTdkBersediaController::class);  
+
+
